@@ -18,7 +18,7 @@
 .panel {
   --panel-pad: clamp(32px, 4.44vw, 64px);
   --cover-ar: 1.16;
-  --cover-w: clamp(208px, 42vw, 312px);
+  --cover-w: clamp(228px, 46vw, 342px);
   --cover-h: calc(var(--cover-w) / var(--cover-ar));
   /* How much of the cover's height the reserved column gives back — i.e. how
      far the artwork rides up past the top of the reserved space. */
@@ -42,7 +42,9 @@
 .cover {
   position: absolute;
   left: var(--cover-x, 0px);
-  bottom: 0;
+  /* Negative values push the artwork further past the card's bottom edge, so
+     more of it is cropped. Never positive — that would open a gap. */
+  bottom: var(--cover-y, 0px);
   display: block;
   width: var(--cover-w);
   height: auto;
@@ -151,14 +153,14 @@
 
 @media (min-width: 900px) {
   .panel {
-    /* 410px at a 1440 viewport — 20% down from the previous 512px, so the book
-       reads as an accent in the card's left third rather than filling its
-       height. The card itself is unchanged (1200 × 452), so the smaller image
-       leaves noticeably more navy above the cover. 410 / 1440 = 28.5vw. */
-    --cover-w: clamp(288px, 28.5vw, 410px);
-    /* Nudged right so the cover's visible left edge stays where it was
-       (~33px in from the card) now that the artwork is narrower. */
-    --cover-x: 6px;
+    /* 450px at a 1440 viewport. The card itself is unchanged (1200 × 452).
+       450 / 1440 = 31.25vw. */
+    --cover-w: clamp(316px, 31.25vw, 450px);
+    /* 35px right of the previous 6px. */
+    --cover-x: 41px;
+    /* 20px lower, so a little more of the cover is cropped by the card's
+       bottom edge. Still no gap underneath — the artwork now runs past it. */
+    --cover-y: -20px;
 
     flex-direction: row;
     align-items: center;
