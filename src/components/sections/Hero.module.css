@@ -1,0 +1,84 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(320px, 27.78vw, 400px);
+  padding-block: var(--section-y);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* `object-fit: cover` + `object-position` on a filled next/image is the
+   background-size / background-position pair, kept as an <img> so the hero
+   still gets responsive sources and an LCP preload. The file is 2880×800 —
+   exactly 2× the 1440×400 Figma frame — so it is never upscaled or stretched.
+
+   Crop plan. At desktop the hero box matches the source aspect ratio, so the
+   whole composition is visible and the crop is centred. As the box narrows the
+   image is cropped horizontally; the position pulls left of centre to hold the
+   seating group and the plant in frame rather than the blown-out blinds on the
+   right, and slightly below centre to favour the furniture band over the empty
+   upper wall. */
+.image {
+  object-fit: cover;
+  object-position: 45% 58%;
+  z-index: -2;
+}
+
+@media (min-width: 768px) {
+  .image {
+    object-position: 48% 54%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .image {
+    object-position: center center;
+  }
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+  color: var(--color-on-dark);
+}
+
+.title {
+  font-size: var(--text-h1);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-h1);
+  text-wrap: balance;
+}
+
+.lead {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-h3);
+  text-wrap: balance;
+}
+
+.states {
+  font-size: var(--text-h4);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-display);
+}
+
+.note {
+  font-size: var(--text-h5);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  text-wrap: balance;
+}

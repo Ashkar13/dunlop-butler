@@ -1,0 +1,111 @@
+.strip {
+  position: relative;
+  background: var(--color-ink);
+  padding-block: var(--space-6);
+  overflow: hidden;
+}
+
+.viewport {
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--ticker-duration) linear infinite;
+}
+
+/* Pause on hover, on keyboard focus anywhere inside, and on demand. */
+.viewport[data-paused="true"] .track,
+.viewport:focus-within .track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.run {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 2.78vw, 40px);
+  padding-inline-end: clamp(20px, 2.78vw, 40px);
+}
+
+.label {
+  color: var(--color-tint-150);
+  font-size: clamp(15px, 0.35vw + 13.7px, 20px);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-snug);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.dot {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-brand);
+}
+
+/* The control sits under the strip and only becomes visible once focused or
+   hovered, so it never competes with the brand band at rest. */
+.controlRow {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.control {
+  pointer-events: auto;
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  color: var(--color-tint-150);
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: var(--radius-pill);
+  min-height: 32px;
+  padding: 6px 12px;
+  margin-bottom: 4px;
+  opacity: 0;
+  transition: opacity var(--duration-hover) var(--ease-out);
+}
+
+.strip:hover .control,
+.control:focus-visible {
+  opacity: 1;
+}
+
+.control:focus-visible {
+  box-shadow: var(--focus-ring-on-dark);
+}
+
+/* Users who ask for less motion get a static, scrollable strip instead. */
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+
+  .viewport {
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .controlRow {
+    display: none;
+  }
+}

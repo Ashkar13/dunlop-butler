@@ -1,0 +1,479 @@
+.header {
+  position: relative;
+  z-index: 30;
+  background: var(--color-surface);
+}
+
+.inner {
+  padding-block: var(--space-4);
+}
+
+.topRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* ------------------------------------------------------------- Logo */
+
+.logoLink {
+  display: block;
+  flex: 0 1 auto;
+  min-width: 0;
+  border-radius: var(--radius-sm);
+}
+
+.logo {
+  width: clamp(128px, 36vw, 241px);
+  height: auto;
+}
+
+/* --------------------------------------------------------- Country */
+
+.country {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 40px;
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  transition:
+    background-color var(--duration-hover) var(--ease-out),
+    box-shadow var(--duration-hover) var(--ease-out);
+}
+
+.country:hover {
+  background: var(--color-ink-06);
+}
+
+.flag {
+  width: 20px;
+  height: 15px;
+  border-radius: 2px;
+}
+
+.countryCode {
+  font-size: var(--text-button);
+  font-weight: var(--weight-medium);
+}
+
+/* ---------------------------------------------------------- Search */
+
+.search {
+  order: 3;
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  border: 1px solid var(--color-ink-20);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  transition:
+    border-color var(--duration-hover) var(--ease-out),
+    box-shadow var(--duration-hover) var(--ease-out);
+}
+
+.search:hover {
+  border-color: var(--color-ink-50);
+}
+
+.search:focus-within {
+  border-color: var(--color-brand);
+  box-shadow: var(--focus-ring);
+}
+
+.scopeField {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.scopeSelect {
+  appearance: none;
+  height: 44px;
+  min-height: 44px;
+  padding-inline: var(--space-4) calc(var(--space-4) + 24px);
+  border: 0;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-button);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.scopeChevron {
+  position: absolute;
+  right: var(--space-4);
+  pointer-events: none;
+}
+
+.divider {
+  flex: 0 0 auto;
+  width: 1px;
+  height: 20px;
+  background: var(--color-ink-20);
+}
+
+.field {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  font-size: var(--text-button);
+  color: var(--color-ink);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-ink-50);
+}
+
+.input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.searchSubmit {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 44px;
+  min-width: 44px;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  transition:
+    background-color var(--duration-hover) var(--ease-out),
+    transform var(--duration-hover) var(--ease-out);
+}
+
+.searchSubmit:hover {
+  background: var(--color-ink-06);
+}
+
+.searchSubmit:active {
+  transform: scale(0.97);
+}
+
+.searchSubmitLabel {
+  font-size: var(--text-button);
+  font-weight: var(--weight-medium);
+}
+
+/* ------------------------------------------------------ Menu / CTAs */
+
+/* Under 480px the country control keeps only the flag + chevron; the full
+   country name stays available to assistive tech through the button label. */
+@media (max-width: 479px) {
+  .countryCode {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+.menuToggle {
+  order: 2;
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 40px;
+  padding-inline: var(--space-3);
+  border: 1px solid var(--color-ink-20);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-button);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  transition:
+    background-color var(--duration-hover) var(--ease-out),
+    border-color var(--duration-hover) var(--ease-out);
+}
+
+.menuToggle:hover {
+  background: var(--color-ink-06);
+  border-color: var(--color-ink-50);
+}
+
+.burger {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  box-shadow:
+    0 -5px 0 currentColor,
+    0 5px 0 currentColor;
+}
+
+.menu {
+  order: 4;
+  flex: 1 1 100%;
+  display: none;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+}
+
+.menu[data-open="true"] {
+  display: flex;
+  animation: menuIn var(--duration-content) var(--ease-out) both;
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.iconButton,
+.account {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-2);
+  height: 44px;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-button);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  transition:
+    background-color var(--duration-hover) var(--ease-out),
+    box-shadow var(--duration-hover) var(--ease-out);
+}
+
+.iconButton:hover,
+.account:hover {
+  background: var(--color-ink-06);
+}
+
+/* The heart is the supplied 20×20 SVG at its native size, centred in the 40×40
+   CTA box from the Figma header. Hover nudges it very slightly rather than
+   recolouring it, so the supplied artwork is never altered. */
+.iconButton img {
+  transition: transform var(--duration-hover) var(--ease-out);
+}
+
+.iconButton:hover img {
+  transform: scale(1.08);
+}
+
+.iconButton:active img {
+  transform: scale(0.96);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding-inline: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--color-brand);
+  color: var(--color-on-dark);
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+}
+
+.postAd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding-inline: var(--space-5);
+  border-radius: var(--radius-sm);
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  font-size: var(--text-button);
+  font-weight: var(--weight-medium);
+  text-align: center;
+  transition:
+    background-color var(--duration-hover) var(--ease-out),
+    transform var(--duration-hover) var(--ease-out),
+    box-shadow var(--duration-hover) var(--ease-out);
+}
+
+.postAd:hover {
+  background: var(--color-deep);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.postAd:active {
+  transform: translateY(1px);
+}
+
+/* ------------------------------------------------------------------
+   Small screens: the search stacks so no label is squeezed, and every
+   control keeps a 44px touch target.
+   ------------------------------------------------------------------ */
+
+@media (max-width: 639px) {
+  .search {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--space-2);
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .scopeField,
+  .field {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .scopeSelect,
+  .input {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    background: var(--color-ink-06);
+    padding-inline: var(--space-3);
+  }
+
+  .scopeField + .divider + .field,
+  .field {
+    margin-top: var(--space-2);
+  }
+
+  .scopeChevron {
+    right: var(--space-3);
+  }
+
+  .searchSubmit {
+    width: 100%;
+    margin-top: var(--space-2);
+    background: var(--color-brand);
+    color: var(--color-on-dark);
+  }
+
+  .searchSubmit:hover {
+    background: var(--color-brand-strong);
+  }
+
+  .searchSubmit img {
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+  }
+}
+
+/* Tablet and up: search returns to a single inline row. */
+
+@media (min-width: 640px) {
+  .searchSubmitLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Desktop: the exact Figma header — one row, 24px gaps, search filling
+   the remaining space, menu pinned right.
+   ------------------------------------------------------------------ */
+
+@media (min-width: 1200px) {
+  .topRow {
+    flex-wrap: nowrap;
+    gap: var(--space-6);
+  }
+
+  .search {
+    order: 0;
+    flex: 1 1 0;
+    padding-right: var(--space-4);
+  }
+
+  .menuToggle {
+    display: none;
+  }
+
+  .menu {
+    order: 0;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2);
+    padding-top: 0;
+    margin-inline-start: auto;
+  }
+
+  .iconButton {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .iconButtonLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .badge {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    pointer-events: none;
+  }
+
+  .account,
+  .postAd {
+    height: 40px;
+  }
+
+  .account {
+    padding-inline: var(--space-3);
+  }
+
+  .countryCode {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

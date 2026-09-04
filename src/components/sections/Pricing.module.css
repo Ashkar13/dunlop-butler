@@ -1,0 +1,202 @@
+.section {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y-lg);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: stretch;
+}
+
+/* Figma: Basic fills the remaining track, Premium is a fixed 662px column. */
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 662px);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-ink-20);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color var(--duration-hover) var(--ease-out),
+    box-shadow var(--duration-hover) var(--ease-out);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.cardFeatured {
+  border-color: var(--color-ink);
+}
+
+.planHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.planTitleRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.planName {
+  flex: 1 1 auto;
+  font-size: var(--text-h4);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-display);
+  color: var(--color-ink);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  font-size: var(--text-button);
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+}
+
+.planDesc {
+  font-size: var(--text-body-1);
+  line-height: var(--leading-display);
+  color: var(--color-ink);
+  text-wrap: pretty;
+}
+
+/* -------------------------------------------------------- Term tabs */
+
+.termTabs {
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border: 1px solid var(--color-ink-20);
+  border-radius: var(--radius-md);
+}
+
+.termTab {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-button-md);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  white-space: nowrap;
+  transition:
+    background-color var(--duration-hover) var(--ease-out),
+    color var(--duration-hover) var(--ease-out);
+}
+
+.termTab:hover {
+  background: var(--color-tint-050);
+}
+
+.termTab[data-selected="true"] {
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+}
+
+/* ------------------------------------------------------------ Price */
+
+.priceRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.priceGroup {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: var(--text-price);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-h2);
+  letter-spacing: var(--tracking-h2);
+  color: var(--color-ink);
+}
+
+.period {
+  font-size: var(--text-body-1);
+  line-height: var(--leading-display);
+  color: var(--color-ink-50);
+}
+
+.pricePending {
+  flex: 1 1 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px dashed var(--color-ink-20);
+  border-radius: var(--radius-md);
+  background: var(--color-tint-050);
+  font-size: var(--text-body-3);
+  line-height: var(--leading-snug);
+  color: var(--color-ink-70);
+  text-wrap: pretty;
+}
+
+.note {
+  font-size: var(--text-body-3);
+  color: var(--color-ink-50);
+}
+
+/* --------------------------------------------------------- Features */
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--text-body-2);
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+}
+
+.feature img {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}

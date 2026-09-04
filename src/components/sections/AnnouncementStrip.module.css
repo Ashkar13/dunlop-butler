@@ -1,0 +1,12 @@
+.strip {
+  background: var(--color-deep);
+  padding: var(--space-3) var(--gutter);
+  text-align: center;
+}
+
+.text {
+  color: var(--color-on-dark);
+  font-size: var(--text-body-3);
+  line-height: var(--leading-snug);
+  text-wrap: balance;
+}

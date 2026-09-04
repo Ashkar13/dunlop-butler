@@ -1,0 +1,44 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/versions
+
+# build output
+/.next/
+/out/
+/build
+/dist
+*.tsbuildinfo
+next-env.d.ts
+
+# runtime / logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# secrets & local env
+.env
+.env.*
+!.env.example
+
+# editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# misc
+/coverage
+.vercel
+*.pem
+/tmp
+
+# Claude transfer copies
+/Claude outputs/

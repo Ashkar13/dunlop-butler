@@ -1,0 +1,37 @@
+/* Visible twin of the polite live region: a small, dismissable-by-timeout
+   note that explains why an action did nothing. Screen-reader users get the
+   same text from the live region, so this copy is aria-hidden. */
+
+.toastWrap {
+  position: fixed;
+  inset-inline: 0;
+  bottom: var(--space-4);
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  padding-inline: var(--space-4);
+  pointer-events: none;
+}
+
+.toast {
+  max-width: 34rem;
+  background: var(--color-deep);
+  color: var(--color-on-dark);
+  font-size: var(--text-body-3);
+  line-height: var(--leading-snug);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop);
+  animation: toastIn var(--duration-content) var(--ease-out) both;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
