@@ -7,16 +7,19 @@ export function BookPromo() {
     <section className={styles.section} aria-labelledby="book-title">
       <div className="container">
         <div className={styles.panel}>
-          <div className={styles.coverFrame}>
-            <Image
-              className={styles.cover}
-              src={BOOK.cover}
-              alt="Cover of “Everything You Need To Know About Tiny Homes & ADUs”, 2026 Edition"
-              width={900}
-              height={606}
-              sizes="(min-width: 900px) 422px, 80vw"
-            />
-          </div>
+          {/* The cover is taken out of flow and pinned to the card's bottom
+              edge, so nothing — padding, margin or an inline baseline — can sit
+              underneath it. The card clips whatever overflows. */}
+          <Image
+            className={styles.cover}
+            src={BOOK.cover}
+            alt="Cover of “Everything You Need To Know About Tiny Homes & ADUs”, 2026 Edition"
+            width={BOOK.coverWidth}
+            height={BOOK.coverHeight}
+            sizes="(min-width: 900px) 561px, 70vw"
+          />
+          {/* Reserves the cover's column so the copy never sits over it. */}
+          <div className={styles.coverSpacer} aria-hidden="true" />
 
           <div className={styles.copy}>
             <div className={styles.text}>
@@ -32,7 +35,10 @@ export function BookPromo() {
               rel="noopener noreferrer"
             >
               {BOOK.cta}
-              <span className="visually-hidden"> on Amazon (opens in a new tab)</span>
+              <span className="visually-hidden">
+                {" "}
+                on Amazon (opens in a new tab)
+              </span>
             </a>
           </div>
         </div>

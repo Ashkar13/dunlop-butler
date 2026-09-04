@@ -222,9 +222,9 @@ export const SHOWCASE_CARDS: ShowcaseCard[] = [
     title: "Everything you need to know about tiny homes & ADUs",
     description:
       "The 2026 Edition is the foundation of the Dunlop & Butler movement.",
-    image: "/assets/images/book-cover-2026.png",
-    width: 900,
-    height: 606,
+    image: "/assets/images/PNG image.png",
+    width: 957,
+    height: 825,
     href: BOOK_URL(),
   },
 ];
@@ -290,7 +290,9 @@ export const BOOK = {
     "The 2026 Edition is the foundation of the Dunlop & Butler movement.",
   cta: "Get the Book",
   href: BOOK_URL(),
-  cover: "/assets/images/book-cover-2026.png",
+  cover: "/assets/images/PNG image.png",
+  coverWidth: 957,
+  coverHeight: 825,
 } as const;
 
 /* ---------------------------------------------------------------- Footer */

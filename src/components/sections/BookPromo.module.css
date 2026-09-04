@@ -2,64 +2,70 @@
   padding-block: 0;
 }
 
+/* ------------------------------------------------------------------
+   The dark card.
+
+   `--cover-w` drives everything: the rendered cover width, and the height
+   the spacer reserves for it. `--cover-ar` is the supplied file's own aspect
+   ratio (957 / 825), so the image is never stretched — only scaled.
+
+   The spacer is `cover height − padding − crop`, which places the top of the
+   image exactly where the reserved column begins: on small screens the whole
+   cover shows, and at desktop the extra crop lets the card cut its top edge
+   the way the Figma composition does.
+   ------------------------------------------------------------------ */
+
 .panel {
+  --panel-pad: clamp(32px, 4.44vw, 64px);
+  --cover-ar: 1.16;
+  --cover-w: clamp(300px, 62vw, 420px);
+  --cover-h: calc(var(--cover-w) / var(--cover-ar));
+  /* How much of the cover's height the reserved column gives back — i.e. how
+     far the artwork rides up past the top of the reserved space. */
+  --cover-inset: var(--panel-pad);
+
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: clamp(24px, 2.78vw, 40px);
-  padding: clamp(32px, 4.44vw, 64px);
+  padding: var(--panel-pad);
   border-radius: clamp(20px, 2.22vw, 32px);
   background: var(--color-deep);
+  /* Clips the cover where it runs past the card. */
   overflow: hidden;
   box-shadow: var(--shadow-inset-panel);
 }
 
-@media (min-width: 900px) {
-  .panel {
-    flex-direction: row;
-    align-items: center;
-  }
-}
-
-/* The supplied cover render is already tilted with its shadow baked in, so it
-   is placed rather than rotated. It deliberately overflows its frame, exactly
-   as in the Figma composition. */
-.coverFrame {
-  position: relative;
-  flex: 0 0 auto;
-  width: min(422px, 100%);
-  height: clamp(220px, 22.5vw, 324px);
-}
-
+/* Pinned to the bottom-left of the card. `bottom: 0` with the image as a
+   block element means there is exactly zero space beneath it — no padding,
+   no margin, and no inline baseline gap. */
 .cover {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: clamp(360px, 39vw, 561px);
+  left: var(--cover-x, 0px);
+  bottom: 0;
+  display: block;
+  width: var(--cover-w);
   height: auto;
   max-width: none;
-  transform: translate(-50%, -46%);
+  pointer-events: none;
+  user-select: none;
 }
 
-@media (max-width: 899px) {
-  .coverFrame {
-    width: 100%;
-    height: clamp(200px, 46vw, 280px);
-  }
-
-  .cover {
-    width: min(480px, 96%);
-    transform: translate(-50%, -48%);
-  }
+.coverSpacer {
+  flex: 0 0 auto;
+  width: var(--cover-w);
+  max-width: 100%;
+  height: calc(var(--cover-h) - var(--cover-inset));
 }
 
 .copy {
   display: flex;
-  flex: 1 1 0;
   flex-direction: column;
   gap: clamp(24px, 2.78vw, 40px);
   min-width: 0;
+  /* Sits above the artwork wherever they meet. */
+  position: relative;
+  z-index: 1;
 }
 
 .text {
@@ -115,4 +121,52 @@
 
 .cta:focus-visible {
   box-shadow: var(--focus-ring-on-dark);
+}
+
+/* ------------------------------------------------------------------
+   Small screens: single column, copy first, the cover reserved beneath it
+   and still welded to the card's bottom edge.
+   ------------------------------------------------------------------ */
+
+@media (max-width: 899px) {
+  .copy {
+    order: 1;
+  }
+
+  .coverSpacer {
+    order: 2;
+    align-self: center;
+  }
+
+  .cover {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Desktop: the Figma composition — cover on the left entering from the
+   lower-left corner and cropped by the card, copy centred beside it.
+   ------------------------------------------------------------------ */
+
+@media (min-width: 900px) {
+  .panel {
+    --cover-w: clamp(400px, 46vw, 561px);
+    /* Both paddings, plus 24px of the cover's top corner clipped by the card
+       — the Figma composition. */
+    --cover-inset: calc(var(--panel-pad) * 2 + 24px);
+    --cover-x: calc(var(--panel-pad) * -0.5);
+
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .coverSpacer {
+    align-self: flex-end;
+    width: min(422px, var(--cover-w));
+  }
+
+  .copy {
+    flex: 1 1 0;
+  }
 }

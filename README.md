@@ -91,14 +91,19 @@ to its section before being copied:
 | `PNG image 3.png` | `tiny-home-interior.jpg` | card — Tiny Home Interior |
 | `PNG image 4.png` | `tiny-home-on-wheels.jpg` | card — Tiny Home on Wheels |
 | `PNG image 5.png` | `tiny-home-community.jpg` | card — Tiny Home Community |
-| `PNG image 6.png` | `book-cover-2026.png` | book panel |
+| `public/assets/images/PNG image.png` (957×825) | *used as supplied* | book CTA panel **and** the "Our Book" card |
 | `PNG image.png` | `flag-us.png` | header country control |
 | `logos/PNG image.png` | `dunlop-butler-logo.png` | header, favicons, Open Graph |
 | `SVG image.svg` → `8.svg` | `chevron-down`, `user`, `heart`, `search`, `house-tiny-home`, `house-adu`, `plan-basic`, `plan-premium` | header, directory, pricing |
 
 Originals stay in `images/` exactly as delivered. Runtime copies are re-encoded
-(photos to progressive JPEG, book cover resized to 900px) — the four photos plus
-the cover total ~820 KB.
+(photos to progressive JPEG) — the four card photos total ~250 KB.
+
+The book cover is the exception: `public/assets/images/PNG image.png` is used
+byte-for-byte as supplied, with no re-encode, resize, rotation or crop. It
+arrives pre-tilted with its shadow baked in and its bottom edge already flat and
+opaque, so it is designed to sit flush on the card. `images/PNG image 6.png` was
+the earlier book render and is no longer referenced anywhere.
 
 `check.svg` and `arrow-up-right.svg` did not exist in `images/`. Their vector
 data was exported from the Figma nodes themselves (`59885:952`, `59885:1106`)
