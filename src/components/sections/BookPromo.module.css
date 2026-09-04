@@ -18,7 +18,7 @@
 .panel {
   --panel-pad: clamp(32px, 4.44vw, 64px);
   --cover-ar: 1.16;
-  --cover-w: clamp(300px, 62vw, 420px);
+  --cover-w: clamp(260px, 52vw, 390px);
   --cover-h: calc(var(--cover-w) / var(--cover-ar));
   /* How much of the cover's height the reserved column gives back — i.e. how
      far the artwork rides up past the top of the reserved space. */
@@ -151,11 +151,13 @@
 
 @media (min-width: 900px) {
   .panel {
-    --cover-w: clamp(400px, 46vw, 561px);
-    /* Both paddings, plus 24px of the cover's top corner clipped by the card
-       — the Figma composition. */
-    --cover-inset: calc(var(--panel-pad) * 2 + 24px);
-    --cover-x: calc(var(--panel-pad) * -0.5);
+    /* Sized from the Figma frame (node 59885:997, card 1200 × 452 at a 1440
+       viewport). There the cover's visible artwork measures 478 × 412 with its
+       top edge 40px below the card and its bottom flush. The supplied render
+       carries 770px of cover across an 825px file, so 412 / 770 × 957 ≈ 512px
+       is the image width that reproduces it. 512 / 1440 = 35.56vw. */
+    --cover-w: clamp(360px, 35.56vw, 512px);
+    --cover-x: -2px;
 
     flex-direction: row;
     align-items: center;
@@ -163,7 +165,10 @@
 
   .coverSpacer {
     align-self: flex-end;
+    /* Figma's cover frame is 422 × 324, which is what makes the card
+       64 + 324 + 64 = 452 tall. 324 / 1440 = 22.5vw. */
     width: min(422px, var(--cover-w));
+    height: clamp(230px, 22.5vw, 324px);
   }
 
   .copy {
